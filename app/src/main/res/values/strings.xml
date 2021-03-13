@@ -2,4 +2,9 @@
     <string name="app_name">StrormotionTestTask</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="an_error_occurred">An error has occurred !</string>
+    <string name="error_img_view">error_img_view</string>
+    <string name="empty_list">List is empty !</string>
+    <string name="image_in_list">image_in_list</string>
+
 </resources>

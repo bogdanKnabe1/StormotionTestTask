@@ -6,5 +6,6 @@
     <string name="error_img_view">error_img_view</string>
     <string name="empty_list">List is empty !</string>
     <string name="image_in_list">image_in_list</string>
+    <string name="main_screen_title">List</string>
 
 </resources>

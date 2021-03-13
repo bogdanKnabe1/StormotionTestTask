@@ -1,8 +1,6 @@
 package com.ninpou.stormotiontesttask.data.network
 
-import com.ninpou.stormotiontesttask.model.SuggestionItem
+import com.ninpou.stormotiontesttask.model.Data
 
 // data class for holding data of response ( status code, message, and fields of response )
-data class SuggestionResponse(val status: Int?, val msg: String?, val data: List<SuggestionItem>?) {
-    fun isSuccess(): Boolean = (status == 200)
-}
+data class DataResponse(val status: Int?, val msg: String?, val data: List<Data>?)

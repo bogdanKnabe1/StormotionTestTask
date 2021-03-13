@@ -2,13 +2,15 @@ package com.ninpou.stormotiontesttask.data.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 
 // create
 object ApiClient {
-    // full link -> https://my.api.mockaroo.com/mock_api
-    private const val API_BASE_URL = "https://my.api.mockaroo.com"
+
+    private const val API_BASE_URL = "https://obscure-earth-55790.herokuapp.com"
 
     private var servicesApiInterface: ServicesApiInterface? = null
 
@@ -34,4 +36,9 @@ object ApiClient {
         return httpLoggingInterceptor
     }
 
+    // TEST API
+    interface ServicesApiInterface {
+        @GET("/api/museums/")
+        suspend fun museums(): Response<DataResponse>
+    }
 }

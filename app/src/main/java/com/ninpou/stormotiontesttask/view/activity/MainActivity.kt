@@ -1,11 +1,11 @@
-package com.ninpou.strormotiontesttask.view.activity
+package com.ninpou.stormotiontesttask.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import com.ninpou.strormotiontesttask.R
-import com.ninpou.strormotiontesttask.databinding.ActivityMainBinding
-import com.ninpou.strormotiontesttask.view.fragments.MainListFragment
+import com.ninpou.stormotiontesttask.R
+import com.ninpou.stormotiontesttask.databinding.ActivityMainBinding
+import com.ninpou.stormotiontesttask.view.fragments.MainListFragment
 
 
 class MainActivity : AppCompatActivity() {

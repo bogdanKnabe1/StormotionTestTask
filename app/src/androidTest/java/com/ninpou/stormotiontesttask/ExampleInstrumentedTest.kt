@@ -1,4 +1,4 @@
-package com.ninpou.strormotiontesttask
+package com.ninpou.stormotiontesttask
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

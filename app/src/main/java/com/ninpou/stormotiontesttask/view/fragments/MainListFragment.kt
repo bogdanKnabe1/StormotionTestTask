@@ -1,11 +1,11 @@
-package com.ninpou.strormotiontesttask.view.fragments
+package com.ninpou.stormotiontesttask.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ninpou.strormotiontesttask.databinding.FragmentMainListBinding
+import com.ninpou.stormotiontesttask.databinding.FragmentMainListBinding
 
 
 class MainListFragment : Fragment() {

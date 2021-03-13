@@ -1,4 +1,4 @@
-package com.ninpou.strormotiontesttask
+package com.ninpou.stormotiontesttask
 
 import org.junit.Test
 

@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.StormotionTestTask">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4044936499457008~5651132334"/>
+
         <activity android:name="com.ninpou.stormotiontesttask.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

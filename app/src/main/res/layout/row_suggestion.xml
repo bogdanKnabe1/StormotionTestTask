@@ -23,7 +23,7 @@
             android:textColor="@color/text_color"
             android:textSize="16sp"
             android:fontFamily="@font/font_sf_regular"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_details"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
@@ -41,7 +41,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_details"
             app:layout_constraintTop_toBottomOf="@+id/text_view_title"
             app:layout_constraintVertical_bias="0.0"
             tools:text="subtitle" />
@@ -58,7 +58,7 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/guideline_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

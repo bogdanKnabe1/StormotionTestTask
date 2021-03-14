@@ -1,10 +1,15 @@
 package com.ninpou.stormotiontesttask.view.fragments
 
+import android.app.ProgressDialog
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -25,6 +30,9 @@ class DetailFragment : Fragment() {
     lateinit var title: String
     lateinit var subTitle: String
     lateinit var image: String
+
+    //mock
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +55,7 @@ class DetailFragment : Fragment() {
 
 
         loadUIFromRecycler()
+        loadVideoUI()
         return view
     }
 
@@ -57,7 +66,7 @@ class DetailFragment : Fragment() {
         setUpToolbar()
     }
 
-    fun loadUIFromRecycler() {
+    private fun loadUIFromRecycler() {
         detailBinding.titleInDetails.text = title.capitalize(Locale.ROOT)
         detailBinding.subtitleInDetails.text = subTitle.capitalize(Locale.ROOT)
         detailBinding.detailsImageView.load(image) {
@@ -67,6 +76,15 @@ class DetailFragment : Fragment() {
             transformations(CircleCropTransformation())
         }
     }
+
+    private fun loadVideoUI() {
+        val mediaController = MediaController(requireActivity())
+        mediaController.setAnchorView(detailBinding.videoView)
+        detailBinding.videoView.setVideoPath("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        detailBinding.videoView.start()
+        detailBinding.videoView.setMediaController(mediaController)
+    }
+
 
     private fun setUpToolbar() {
         with(detailBinding) {

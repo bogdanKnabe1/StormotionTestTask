@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         Log.v(TAG, "onMessageError $it")
         mainActivityBinding.layoutError.layoutErrorRoot.visibility = View.VISIBLE
         mainActivityBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
-        mainActivityBinding.layoutError.textViewError.text = "Error $it"
+        mainActivityBinding.layoutError.textViewError.text = getString(R.string.an_error_occurred)
     }
 
     private val emptyListObserver = Observer<Boolean> {
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityBinding.layoutError.layoutErrorRoot.visibility = View.GONE
     }
 
-    //If we require to updated data, you can call the method "loadData" here
+    //If we require to updated data, we can call the method "loadData" here
     override fun onResume() {
         super.onResume()
         viewModel.loadData()

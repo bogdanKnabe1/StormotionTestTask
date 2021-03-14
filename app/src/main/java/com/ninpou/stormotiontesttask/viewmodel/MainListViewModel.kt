@@ -25,7 +25,7 @@ class MainListViewModel(private val repository: SuggestionItemRepository) : View
     private val _isEmptyList = MutableLiveData<Boolean>()
     val isEmptyList: LiveData<Boolean> = _isEmptyList
 
-    fun loadMuseums() {
+    fun loadData() {
         _isViewLoading.value = true
         viewModelScope.launch {
             var result: OperationResult<Data> = withContext(Dispatchers.IO) {

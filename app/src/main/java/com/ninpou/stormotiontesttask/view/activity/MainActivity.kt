@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     //ui
     private fun setupUI() {
-        adapter = SuggestionListAdapter(viewModel.suggestionListData.value ?: emptyList())
+        adapter = SuggestionListAdapter(this, viewModel.suggestionListData.value ?: emptyList())
         mainActivityBinding.listRecycler.layoutManager = LinearLayoutManager(this)
         mainActivityBinding.listRecycler.adapter = adapter
     }
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(Injection.providerRepository()))
             .get(MainListViewModel::class.java)
-        viewModel.suggestionListData.observe(this, renderMuseums)
+        viewModel.suggestionListData.observe(this, renderData)
 
         viewModel.isViewLoading.observe(this, isViewLoadingObserver)
         viewModel.onMessageError.observe(this, onMessageErrorObserver)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //observers
-    private val renderMuseums = Observer<List<Data>> {
+    private val renderData = Observer<List<Data>> {
         Log.v(TAG, "data updated $it")
         mainActivityBinding.layoutError.layoutErrorRoot.visibility = View.GONE
         mainActivityBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
@@ -88,10 +88,9 @@ class MainActivity : AppCompatActivity() {
         mainActivityBinding.layoutError.layoutErrorRoot.visibility = View.GONE
     }
 
-    //If you require updated data, you can call the method "loadMuseum" here
+    //If we require to updated data, you can call the method "loadData" here
     override fun onResume() {
         super.onResume()
-        viewModel.loadMuseums()
+        viewModel.loadData()
     }
-
 }

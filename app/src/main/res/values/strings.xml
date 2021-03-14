@@ -7,5 +7,7 @@
     <string name="empty_list">List is empty !</string>
     <string name="image_in_list">image_in_list</string>
     <string name="main_screen_title">List</string>
+    <string name="details_screen_title">Initial examination</string>
+    <string name="settings_menu">settings</string>
 
 </resources>

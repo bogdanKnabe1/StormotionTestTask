@@ -27,8 +27,9 @@ class MainListFragment : Fragment() {
 
     private val viewModel: MainListViewModel by lazy {
         val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
+            "viewModel can be accessed after onActivityCreated()"
         }
+        // check deprecate
         ViewModelProviders.of(
             this,
             MainListViewModel.ViewModelFactory(

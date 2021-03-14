@@ -1,6 +1,7 @@
 package com.ninpou.stormotiontesttask.view.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,8 +78,13 @@ class SuggestionListAdapter(
                 itemView.setOnClickListener {
                     val navController: NavController?
                     navController = Navigation.findNavController(itemView)
-                    navController.navigate(R.id.action_mainFragment_to_detailsFragment)
-
+                    val bundle = Bundle()
+                    with(bundle) {
+                        putString("title", recyclerViewModelDataItem.title)
+                        putString("subtitle", recyclerViewModelDataItem.subTitle)
+                        putString("image", recyclerViewModelDataItem.image)
+                    }
+                    navController.navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
                 }
                 textViewTitle.text = recyclerViewModelDataItem.title.capitalize(Locale.ROOT)
                 textViewSubtitle.text = recyclerViewModelDataItem.subTitle.capitalize(Locale.ROOT)
@@ -91,7 +97,6 @@ class SuggestionListAdapter(
             }
         }
     }
-
 
     override fun getItemViewType(position: Int): Int {
         return data[position].type

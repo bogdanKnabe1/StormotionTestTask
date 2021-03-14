@@ -9,5 +9,6 @@
     <string name="main_screen_title">List</string>
     <string name="details_screen_title">Initial examination</string>
     <string name="settings_menu">settings</string>
+    <string name="video_details_fragment">video_details_fragment</string>
 
 </resources>

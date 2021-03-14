@@ -15,29 +15,89 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/title_in_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FRAGMENT DETAIL"
-        android:fontFamily="@font/font_sf_regular"
-        android:textColor="@color/text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/details_toolbar"
+        tools:src="@tools:sample/avatars[5]"
+        android:contentDescription="@string/video_details_fragment" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/title_in_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:fontFamily="@font/font_sf_regular"
+            android:textColor="@color/text_color"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/subtitle_in_details"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/font_helvetica"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/title_in_details"
+            tools:text="subtitle" />
+
+        <ImageView
+            android:id="@+id/details_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/image_in_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="88dp"
+            app:layout_constraintStart_toEndOf="@+id/details_image_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/subtitle_in_details"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/font_sf_regular"
-        android:text="subtitle"
+        tools:text="Tobias ist in der Lage, sicher den Kopf in Bauchlage zu heben und kann sich auf die Unterarme stützen."
+        android:textSize="14sp"
         android:textColor="@color/text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/font_sf_regular"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_in_details"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

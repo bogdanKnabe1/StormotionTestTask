@@ -15,12 +15,20 @@ import java.util.*
 
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
-class SuggestionListAdapter(private val context: Context, private var data: List<Data>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SuggestionListAdapter(
+    private val onClickItem: ClickItem,
+    private val context: Context,
+    private var data: List<Data>,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val VIEW_TYPE_ONE = 1
         const val VIEW_TYPE_TWO = 2
+    }
+
+    // Allows us to start the function that will handle the onClick event
+    interface ClickItem {
+        fun onClickListener(test: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -59,7 +67,8 @@ class SuggestionListAdapter(private val context: Context, private var data: List
 
         fun bind(position: Int) {
             val recyclerViewModelHeaderItem = data[position]
-            binding.headerTextView.text = recyclerViewModelHeaderItem.headerTitle.capitalize(Locale.ROOT)
+            binding.headerTextView.text =
+                recyclerViewModelHeaderItem.headerTitle.capitalize(Locale.ROOT)
         }
     }
 
@@ -69,6 +78,7 @@ class SuggestionListAdapter(private val context: Context, private var data: List
         fun bind(position: Int) {
             with(binding) {
                 val recyclerViewModelDataItem = data[position]
+                itemView.setOnClickListener { onClickItem.onClickListener("TEST") }
                 textViewTitle.text = recyclerViewModelDataItem.title.capitalize(Locale.ROOT)
                 textViewSubtitle.text = recyclerViewModelDataItem.subTitle.capitalize(Locale.ROOT)
                 mainListImageView.load(recyclerViewModelDataItem.image) {
@@ -80,6 +90,7 @@ class SuggestionListAdapter(private val context: Context, private var data: List
             }
         }
     }
+
 
     override fun getItemViewType(position: Int): Int {
         return data[position].type

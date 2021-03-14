@@ -1,9 +1,7 @@
 package com.ninpou.stormotiontesttask.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.ninpou.stormotiontesttask.data.network.OperationResult
 import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.model.SuggestionItemRepository
@@ -11,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainListViewModel(private val repository: SuggestionItemRepository) : ViewModel() {
+class MainListViewModel(private val repository: SuggestionItemRepository, app: Application) : AndroidViewModel(app) {
 
     private val _data = MutableLiveData<List<Data>>().apply { value = emptyList() }
     val suggestionListData: LiveData<List<Data>> = _data
@@ -42,9 +40,16 @@ class MainListViewModel(private val repository: SuggestionItemRepository) : View
                 }
                 is OperationResult.Error -> {
                     _onMessageError.value = result.exception!!
-
                 }
             }
+        }
+    }
+
+    class ViewModelFactory(private val repository: SuggestionItemRepository, val app: Application) :
+        ViewModelProvider.Factory {
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return MainListViewModel(repository, app) as T
         }
     }
 }

@@ -10,18 +10,18 @@ import com.ninpou.stormotiontesttask.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
 
-    private var fragmentListBinding: FragmentDetailBinding? = null
+    private var fragmentDetailBinding: FragmentDetailBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = fragmentListBinding!!
+    private val detailBinding get() = fragmentDetailBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentListBinding = FragmentDetailBinding.inflate(inflater, container, false)
-        val view = binding.root
+        fragmentDetailBinding = FragmentDetailBinding.inflate(inflater, container, false)
+        val view = detailBinding.root
 
         return view
     }

@@ -10,4 +10,3 @@ data class Data(
     val title: String,
     val type: Int
 ) : Serializable
-

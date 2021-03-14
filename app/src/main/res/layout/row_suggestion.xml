@@ -36,12 +36,11 @@
             tools:text="subtitle" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/main_list_image_view"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
             android:contentDescription="@string/image_in_list"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

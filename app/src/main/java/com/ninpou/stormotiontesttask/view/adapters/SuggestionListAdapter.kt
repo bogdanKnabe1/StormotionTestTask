@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.ninpou.stormotiontesttask.R
 import com.ninpou.stormotiontesttask.databinding.RowSuggestionBinding
 import com.ninpou.stormotiontesttask.model.Data
@@ -37,11 +38,15 @@ class SuggestionListAdapter(private var data: List<Data>) :
 
         fun bind(data: Data) {
             with(binding) {
-                binding.textViewTitle.text = data.name
-                binding.textViewSubtitle.text = data.id.toString()
-                Glide.with(imageView.context).load(data.photo).into(imageView)
+                textViewTitle.text = data.title
+                textViewSubtitle.text = data.subTitle
+                mainListImageView.load(data.image) {
+                    crossfade(true)
+                    crossfade(1000)
+                    placeholder(R.drawable.ic_launcher_foreground)
+                    transformations(CircleCropTransformation())
+                }
             }
-
         }
     }
 }

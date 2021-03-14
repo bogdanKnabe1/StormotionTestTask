@@ -13,8 +13,8 @@ import kotlinx.coroutines.withContext
 
 class MainListViewModel(private val repository: SuggestionItemRepository) : ViewModel() {
 
-    private val _museums = MutableLiveData<List<Data>>().apply { value = emptyList() }
-    val museums: LiveData<List<Data>> = _museums
+    private val _data = MutableLiveData<List<Data>>().apply { value = emptyList() }
+    val suggestionListData: LiveData<List<Data>> = _data
 
     private val _isViewLoading = MutableLiveData<Boolean>()
     val isViewLoading: LiveData<Boolean> = _isViewLoading
@@ -37,7 +37,7 @@ class MainListViewModel(private val repository: SuggestionItemRepository) : View
                     if (result.data.isNullOrEmpty()) {
                         _isEmptyList.value = true
                     } else {
-                        _museums.value = result.data
+                        _data.value = result.data
                     }
                 }
                 is OperationResult.Error -> {

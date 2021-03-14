@@ -12,7 +12,6 @@ import com.ninpou.stormotiontesttask.databinding.ActivityMainBinding
 import com.ninpou.stormotiontesttask.di.Injection
 import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.view.adapters.SuggestionListAdapter
-
 import com.ninpou.stormotiontesttask.viewmodel.MainListViewModel
 import com.ninpou.stormotiontesttask.viewmodel.ViewModelFactory
 
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     //ui
     private fun setupUI() {
-        adapter = SuggestionListAdapter(viewModel.museums.value ?: emptyList())
+        adapter = SuggestionListAdapter(viewModel.suggestionListData.value ?: emptyList())
         mainActivityBinding.listRecycler.layoutManager = LinearLayoutManager(this)
         mainActivityBinding.listRecycler.adapter = adapter
     }
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(Injection.providerRepository()))
             .get(MainListViewModel::class.java)
-        viewModel.museums.observe(this, renderMuseums)
+        viewModel.suggestionListData.observe(this, renderMuseums)
 
         viewModel.isViewLoading.observe(this, isViewLoadingObserver)
         viewModel.onMessageError.observe(this, onMessageErrorObserver)

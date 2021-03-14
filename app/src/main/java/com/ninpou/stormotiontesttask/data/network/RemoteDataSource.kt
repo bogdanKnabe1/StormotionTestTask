@@ -1,6 +1,5 @@
 package com.ninpou.stormotiontesttask.data.network
 
-import android.util.Log
 import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.model.SuggestionItemDataSourceI
 
@@ -12,15 +11,11 @@ class RemoteDataSource(apiClient: ApiClient) : SuggestionItemDataSourceI {
 
     override suspend fun retrieveData(): OperationResult<Data> {
         try {
-            val response = service?.museums()
+            val response = service?.dataList()
             response?.let {
-                return if (it.isSuccessful && it.body() != null) {
-                    val data = it.body()?.data
-                    Log.d("ASD", "${it.body()}")
+                return run {
+                    val data = it
                     OperationResult.Success(data)
-                } else {
-                    val message = it.body()?.msg
-                    OperationResult.Error(Exception(message))
                 }
             } ?: run {
                 return OperationResult.Error(Exception("An error occurred"))

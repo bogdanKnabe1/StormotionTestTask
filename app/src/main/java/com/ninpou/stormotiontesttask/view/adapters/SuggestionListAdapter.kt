@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -16,7 +18,6 @@ import java.util.*
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 class SuggestionListAdapter(
-    private val onClickItem: ClickItem,
     private val context: Context,
     private var data: List<Data>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -24,11 +25,6 @@ class SuggestionListAdapter(
     companion object {
         const val VIEW_TYPE_ONE = 1
         const val VIEW_TYPE_TWO = 2
-    }
-
-    // Allows us to start the function that will handle the onClick event
-    interface ClickItem {
-        fun onClickListener(test: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -78,7 +74,12 @@ class SuggestionListAdapter(
         fun bind(position: Int) {
             with(binding) {
                 val recyclerViewModelDataItem = data[position]
-                itemView.setOnClickListener { onClickItem.onClickListener("TEST") }
+                itemView.setOnClickListener {
+                    val navController: NavController?
+                    navController = Navigation.findNavController(itemView)
+                    navController.navigate(R.id.action_mainFragment_to_detailsFragment)
+
+                }
                 textViewTitle.text = recyclerViewModelDataItem.title.capitalize(Locale.ROOT)
                 textViewSubtitle.text = recyclerViewModelDataItem.subTitle.capitalize(Locale.ROOT)
                 mainListImageView.load(recyclerViewModelDataItem.image) {

@@ -61,13 +61,11 @@ dependencies {
 
     //Navigation Components
     def nav_version = "2.3.4"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version" // For Kotlin use navigation-fragment-ktx
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version" // For Kotlin use navigation-ui-ktx
 
-    //Material Design
-    def material_version = "1.2.0-alpha05"
+    // recycler
     def recycler_view_version = "1.2.0-alpha01"
-    implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
 
     //COIL - Image library

@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ninpou.stormotiontesttask.R
 import com.ninpou.stormotiontesttask.databinding.FragmentMainListBinding
@@ -17,10 +19,11 @@ import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.view.adapters.SuggestionListAdapter
 import com.ninpou.stormotiontesttask.viewmodel.MainListViewModel
 
-class MainListFragment : Fragment(), SuggestionListAdapter.ClickItem {
+class MainListFragment : Fragment() {
 
     private var fragmentMainListBinding: FragmentMainListBinding? = null
     private lateinit var adapter: SuggestionListAdapter
+    lateinit var navController: NavController
 
     private val viewModel: MainListViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -42,6 +45,12 @@ class MainListFragment : Fragment(), SuggestionListAdapter.ClickItem {
         const val TAG = "ASD"
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        setUpToolbar()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,16 +59,16 @@ class MainListFragment : Fragment(), SuggestionListAdapter.ClickItem {
         fragmentMainListBinding = FragmentMainListBinding.inflate(inflater, container, false)
         val view = mainListBinding.root
 
-        setUpToolbar()
         setupUI()
         setupViewModel()
         return view
     }
 
     private fun setUpToolbar() {
-        val toolbar = mainListBinding.baseToolbar.toolbarLayout
-        toolbar.setTitle(R.string.main_screen_title)
-        //setSupportActionBar(toolbar)
+        with(mainListBinding) {
+            baseToolbar.toolbarLayout.setupWithNavController(navController)
+            baseToolbar.toolbarLayout.setTitle(R.string.main_screen_title)
+        }
     }
 
     //ui
@@ -112,21 +121,10 @@ class MainListFragment : Fragment(), SuggestionListAdapter.ClickItem {
         viewModel.loadData()
     }
 
-
     private fun createAdapter(): SuggestionListAdapter {
         return SuggestionListAdapter(
-            this,
             requireContext(),
-            viewModel.suggestionListData.value ?: emptyList()
+            viewModel.suggestionListData.value ?: emptyList(),
         )
-    }
-
-    override fun onClickListener(test: String) {
-        val dialogName = AlertDialog.Builder(requireActivity())
-        dialogName.setTitle("TEST CLICK")
-        dialogName.setMessage(" $test --- $test")
-        dialogName.setIcon(R.mipmap.ic_launcher)
-        val dialog = dialogName.create()
-        dialog.show()
     }
 }

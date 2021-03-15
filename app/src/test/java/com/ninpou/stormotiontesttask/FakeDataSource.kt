@@ -1,4 +1,4 @@
-package com.emedinaa.kotlinmvvm
+package com.ninpou.stormotiontesttask
 
 import com.ninpou.stormotiontesttask.data.network.OperationResult
 import com.ninpou.stormotiontesttask.model.Data

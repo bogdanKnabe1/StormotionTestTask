@@ -3,9 +3,6 @@ package com.ninpou.stormotiontesttask
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.emedinaa.kotlinmvvm.FakeDataSource
-import com.emedinaa.kotlinmvvm.FakeEmptyDataSource
-import com.emedinaa.kotlinmvvm.FakeErrorDataSource
 import com.ninpou.stormotiontesttask.data.network.OperationResult
 import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.model.SuggestionItemRepository
@@ -34,12 +31,12 @@ class MVVMUnitTest {
     private lateinit var emptyListObserver: Observer<Boolean>
     private lateinit var onRenderDataObserver: Observer<List<Data>>
 
-    private lateinit var museumEmptyList: List<Data>
-    private lateinit var museumList: List<Data>
+    private lateinit var dataEmptyList: List<Data>
+    private lateinit var dataList: List<Data>
 
-    private val fakeMuseumDataSource = FakeDataSource()
-    private val fakeEmptyMuseumDataSource = FakeEmptyDataSource()
-    private val fakeErrorMuseumDataSource = FakeErrorDataSource()
+    private val fakeDataDataSource = FakeDataSource()
+    private val fakeEmptyDataSource = FakeEmptyDataSource()
+    private val fakeErrorDataSource = FakeErrorDataSource()
 
     @ExperimentalCoroutinesApi
     private val testDispatcher = TestCoroutineDispatcher()
@@ -68,8 +65,8 @@ class MVVMUnitTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `retrieve museums with ViewModel and Repository returns empty data`() {
-        viewModel = SharedViewModel(SuggestionItemRepository(fakeEmptyMuseumDataSource), context)
+    fun `retrieve data with ViewModel and Repository returns empty data`() {
+        viewModel = SharedViewModel(SuggestionItemRepository(fakeEmptyDataSource), context)
 
         with(viewModel) {
             loadData()
@@ -79,7 +76,7 @@ class MVVMUnitTest {
         }
 
         runBlockingTest {
-            val response = fakeEmptyMuseumDataSource.retrieveData()
+            val response = fakeEmptyDataSource.retrieveData()
             Assert.assertTrue(response is OperationResult.Success)
             Assert.assertNotNull(viewModel.isViewLoading.value)
             Assert.assertTrue(viewModel.isEmptyList.value == true)
@@ -89,8 +86,8 @@ class MVVMUnitTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `retrieve museums with ViewModel and Repository returns full data`() {
-        viewModel = SharedViewModel(SuggestionItemRepository(fakeMuseumDataSource), context)
+    fun `retrieve data with ViewModel and Repository returns full data`() {
+        viewModel = SharedViewModel(SuggestionItemRepository(fakeDataDataSource), context)
 
         with(viewModel) {
             loadData()
@@ -99,7 +96,7 @@ class MVVMUnitTest {
         }
 
         runBlockingTest {
-            val response = fakeMuseumDataSource.retrieveData()
+            val response = fakeDataDataSource.retrieveData()
             Assert.assertTrue(response is OperationResult.Success)
             Assert.assertNotNull(viewModel.isViewLoading.value)
             Assert.assertTrue(viewModel.suggestionListData.value?.size == 3)
@@ -108,8 +105,8 @@ class MVVMUnitTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `retrieve museums with ViewModel and Repository returns an error`() {
-        viewModel = SharedViewModel(SuggestionItemRepository(fakeErrorMuseumDataSource), context)
+    fun `retrieve data with ViewModel and Repository returns an error`() {
+        viewModel = SharedViewModel(SuggestionItemRepository(fakeErrorDataSource), context)
         with(viewModel) {
             loadData()
             isViewLoading.observeForever(isViewLoadingObserver)
@@ -118,7 +115,7 @@ class MVVMUnitTest {
         }
 
         runBlockingTest {
-            val response = fakeErrorMuseumDataSource.retrieveData()
+            val response = fakeErrorDataSource.retrieveData()
             Assert.assertTrue(response is OperationResult.Error)
             Assert.assertNotNull(viewModel.isViewLoading.value)
             Assert.assertNotNull(viewModel.onMessageError.value)
@@ -133,7 +130,7 @@ class MVVMUnitTest {
     }
 
     private fun mockData() {
-        museumEmptyList = emptyList()
+        dataEmptyList = emptyList()
         val mockList: MutableList<Data> = mutableListOf()
         mockList.add(
             Data(
@@ -166,6 +163,6 @@ class MVVMUnitTest {
             )
         )
 
-        museumList = mockList.toList()
+        dataList = mockList.toList()
     }
 }

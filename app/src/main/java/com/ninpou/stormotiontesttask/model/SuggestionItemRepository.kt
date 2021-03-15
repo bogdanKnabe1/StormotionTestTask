@@ -6,4 +6,5 @@ import com.ninpou.stormotiontesttask.data.network.OperationResult
 class SuggestionItemRepository(private val suggestionItemDataSourceI: SuggestionItemDataSourceI) {
 
     suspend fun fetchData(): OperationResult<Data> = suggestionItemDataSourceI.retrieveData()
+    suspend fun fetchVideoData(): OperationResult<DataVideo> = suggestionItemDataSourceI.retrieveVideoData()
 }

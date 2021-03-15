@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -17,7 +18,7 @@ import com.ninpou.stormotiontesttask.databinding.FragmentMainListBinding
 import com.ninpou.stormotiontesttask.di.DependencyInjectionTemplate
 import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.view.adapters.SuggestionListAdapter
-import com.ninpou.stormotiontesttask.viewmodel.MainListViewModel
+import com.ninpou.stormotiontesttask.viewmodel.SharedViewModel
 
 class MainListFragment : Fragment() {
 
@@ -25,19 +26,26 @@ class MainListFragment : Fragment() {
     private lateinit var adapter: SuggestionListAdapter
     lateinit var navController: NavController
 
-    private val viewModel: MainListViewModel by lazy {
+    /*private val viewModel: SharedViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "viewModel can be accessed after onActivityCreated()"
         }
         // check deprecate
         ViewModelProviders.of(
             this,
-            MainListViewModel.ViewModelFactory(
+            SharedViewModel.ViewModelFactory(
                 DependencyInjectionTemplate.providerRepository(),
                 activity.application
             )
         )
-            .get(MainListViewModel::class.java)
+            .get(SharedViewModel::class.java)
+    }*/
+
+    private val viewModel: SharedViewModel by activityViewModels {
+        val application = requireActivity().application
+        SharedViewModel.ViewModelFactory(
+            DependencyInjectionTemplate.providerRepository(),
+            application)
     }
 
     private val mainListBinding get() = fragmentMainListBinding!!

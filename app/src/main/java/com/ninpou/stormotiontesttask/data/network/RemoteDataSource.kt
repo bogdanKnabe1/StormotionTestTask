@@ -1,6 +1,7 @@
 package com.ninpou.stormotiontesttask.data.network
 
 import com.ninpou.stormotiontesttask.model.Data
+import com.ninpou.stormotiontesttask.model.DataVideo
 import com.ninpou.stormotiontesttask.model.SuggestionItemDataSourceI
 
 // make network request to request data and retrieve it, using interface and API(retrofit),
@@ -19,6 +20,22 @@ class RemoteDataSource(apiClient: ApiClient) : SuggestionItemDataSourceI {
                 }
             } ?: run {
                 return OperationResult.Error(Exception("An error occurred"))
+            }
+        } catch (e: Exception) {
+            return OperationResult.Error(e)
+        }
+    }
+
+    override suspend fun retrieveVideoData(): OperationResult<DataVideo> {
+        try {
+            val response = service?.dataVideo()
+            response?.let {
+                return run {
+                    val dataVideo = it
+                    OperationResult.Success(dataVideo)
+                }
+            } ?: run {
+                return OperationResult.Error(Exception("An error occurred while loading video"))
             }
         } catch (e: Exception) {
             return OperationResult.Error(e)

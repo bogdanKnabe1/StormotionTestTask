@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
@@ -26,22 +25,7 @@ class MainListFragment : Fragment() {
     private lateinit var adapter: SuggestionListAdapter
     lateinit var navController: NavController
 
-    /*private val viewModel: SharedViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "viewModel can be accessed after onActivityCreated()"
-        }
-        // check deprecate
-        ViewModelProviders.of(
-            this,
-            SharedViewModel.ViewModelFactory(
-                DependencyInjectionTemplate.providerRepository(),
-                activity.application
-            )
-        )
-            .get(SharedViewModel::class.java)
-    }*/
-
-    private val viewModel: SharedViewModel by activityViewModels {
+    private val sharedViewModel: SharedViewModel by activityViewModels {
         val application = requireActivity().application
         SharedViewModel.ViewModelFactory(
             DependencyInjectionTemplate.providerRepository(),
@@ -89,12 +73,11 @@ class MainListFragment : Fragment() {
 
     //view model
     private fun setupViewModel() {
+        sharedViewModel.suggestionListData.observe(viewLifecycleOwner, renderData)
 
-        viewModel.suggestionListData.observe(viewLifecycleOwner, renderData)
-
-        viewModel.isViewLoading.observe(viewLifecycleOwner, isViewLoadingObserver)
-        viewModel.onMessageError.observe(viewLifecycleOwner, onMessageErrorObserver)
-        viewModel.isEmptyList.observe(viewLifecycleOwner, emptyListObserver)
+        sharedViewModel.isViewLoading.observe(viewLifecycleOwner, isViewLoadingObserver)
+        sharedViewModel.onMessageError.observe(viewLifecycleOwner, onMessageErrorObserver)
+        sharedViewModel.isEmptyList.observe(viewLifecycleOwner, emptyListObserver)
     }
 
     //observers
@@ -127,13 +110,13 @@ class MainListFragment : Fragment() {
     //If we require to updated data, we can call the method "loadData" here
     override fun onResume() {
         super.onResume()
-        viewModel.loadData()
+        sharedViewModel.loadData()
     }
 
     private fun createAdapter(): SuggestionListAdapter {
         return SuggestionListAdapter(
             requireContext(),
-            viewModel.suggestionListData.value ?: emptyList(),
+            sharedViewModel.suggestionListData.value ?: emptyList(),
         )
     }
 }

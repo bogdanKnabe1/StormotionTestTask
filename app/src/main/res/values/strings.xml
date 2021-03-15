@@ -10,5 +10,6 @@
     <string name="details_screen_title">Initial examination</string>
     <string name="settings_menu">settings</string>
     <string name="video_details_fragment">video_details_fragment</string>
+    <string name="template_text">Tobias ist in der Lage, sicher den Kopf in Bauchlage zu heben und kann sich auf die Unterarme stützen.</string>
 
 </resources>

@@ -72,7 +72,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
 
     //COIL - Image library
-    implementation "io.coil-kt:coil:1.1.1"
+    implementation("io.coil-kt:coil:1.1.1")
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

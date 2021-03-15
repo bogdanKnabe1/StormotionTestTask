@@ -83,6 +83,7 @@ class SuggestionListAdapter(
                         putString("title", recyclerViewModelDataItem.title)
                         putString("subtitle", recyclerViewModelDataItem.subTitle)
                         putString("image", recyclerViewModelDataItem.image)
+                        putInt("position", position)
                     }
                     navController.navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
                 }

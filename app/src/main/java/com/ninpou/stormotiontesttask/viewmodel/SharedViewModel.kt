@@ -52,7 +52,7 @@ class SharedViewModel(private val repository: SuggestionItemRepository, app: App
     fun loadVideoData() {
         _isViewLoading.value = true
         viewModelScope.launch {
-            var result: OperationResult<DataVideo> = withContext(Dispatchers.IO) {
+            val result: OperationResult<DataVideo> = withContext(Dispatchers.IO) {
                 repository.fetchVideoData()
             }
             _isViewLoading.value = false

@@ -51,9 +51,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "org.mockito:mockito-core:2.27.0"
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+    androidTestImplementation "org.mockito:mockito-core:2.27.0"
 
     // adMob google ads
     implementation 'com.google.android.gms:play-services-ads:19.7.0'

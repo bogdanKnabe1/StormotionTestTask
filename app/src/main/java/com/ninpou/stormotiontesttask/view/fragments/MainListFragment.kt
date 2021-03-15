@@ -47,7 +47,7 @@ class MainListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         fragmentMainListBinding = FragmentMainListBinding.inflate(inflater, container, false)
         val view = mainListBinding.root
@@ -82,7 +82,7 @@ class MainListFragment : Fragment() {
 
     //observers
     private val renderData = Observer<List<Data>> {
-        Log.v(TAG, "data updated $it")
+        Log.v(TAG, "data updated IN main list $it")
         mainListBinding.layoutError.layoutErrorRoot.visibility = View.GONE
         mainListBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
         adapter.update(it)

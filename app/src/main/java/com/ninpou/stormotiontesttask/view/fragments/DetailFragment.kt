@@ -47,6 +47,9 @@ class DetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedViewModel.loadVideoData()
+
         title = requireArguments().getString("title").toString()
         subTitle = requireArguments().getString("subtitle").toString()
         image = requireArguments().getString("image").toString()
@@ -109,11 +112,11 @@ class DetailFragment : Fragment() {
     }
 
     private val videoData = Observer<List<DataVideo>> {
-        Log.v(TAG, "data updated $it")
+        Log.v(TAG, "data updated IN details $it")
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
 
-        loadVideoAndDescriptionUI(position, sharedViewModel.videoListData.value ?: emptyList())
+        loadVideoAndDescriptionUI(position, it)
     }
 
     private val isViewLoadingObserver = Observer<Boolean> {
@@ -133,12 +136,6 @@ class DetailFragment : Fragment() {
         Log.v(TAG, "emptyListObserver $it")
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.VISIBLE
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        sharedViewModel.loadVideoData()
     }
 
     private fun setUpToolbar() {

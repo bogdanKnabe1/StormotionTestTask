@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:layout_margin="4dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="36dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,37 +20,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:fontFamily="@font/font_sf_regular"
+            app:layout_constraintStart_toStartOf="@+id/guideline_details"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
         <TextView
             android:id="@+id/text_view_subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="254dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="18dp"
+            android:textColor="@color/text_color"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:fontFamily="@font/font_helvetica"
+            android:singleLine="true"
+            android:lines="1"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_details"
             app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="subtitle" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/main_list_image_view"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
             android:contentDescription="@string/image_in_list"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:color/darker_gray" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/guideline_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

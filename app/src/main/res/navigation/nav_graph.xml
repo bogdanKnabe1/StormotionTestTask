@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/mainFragment">
+
+    <!-- MainFragment -->
+    <fragment android:id="@+id/mainFragment"
+              android:name="com.ninpou.stormotiontesttask.view.fragments.MainListFragment"
+              android:label="fragment_main"
+              tools:layout="@layout/fragment_main_list">
+
+        <action android:id="@+id/action_mainFragment_to_detailsFragment"
+                app:destination="@id/detailsFragmentFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+
+    </fragment>
+
+
+    <!-- DetailsFragment -->
+    <fragment android:id="@+id/detailsFragmentFragment"
+              android:name="com.ninpou.stormotiontesttask.view.fragments.DetailFragment"
+              android:label="fragment_details"
+              tools:layout="@layout/fragment_detail"/>
+
+</navigation>

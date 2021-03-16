@@ -38,6 +38,11 @@ class MainListFragment : Fragment() {
         const val TAG = "ASD"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedViewModel.loadData()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
@@ -108,10 +113,6 @@ class MainListFragment : Fragment() {
     }
 
     //If we require to updated data, we can call the method "loadData" here
-    override fun onResume() {
-        super.onResume()
-        sharedViewModel.loadData()
-    }
 
     private fun createAdapter(): SuggestionListAdapter {
         return SuggestionListAdapter(

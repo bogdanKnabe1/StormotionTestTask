@@ -30,7 +30,7 @@ class SharedViewModel(private val repository: SuggestionItemRepository, app: App
     fun loadData() {
         _isViewLoading.value = true
         viewModelScope.launch {
-            var result: OperationResult<Data> = withContext(Dispatchers.IO) {
+            val result: OperationResult<Data> = withContext(Dispatchers.IO) {
                 repository.fetchData()
             }
             _isViewLoading.value = false

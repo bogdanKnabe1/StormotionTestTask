@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class DataVideo(
     val videoUrl: String,
-    val description: String,
+    val descriptions: String,
 ) : Serializable

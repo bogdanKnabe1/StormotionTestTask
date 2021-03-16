@@ -18,7 +18,6 @@ import coil.transform.CircleCropTransformation
 import com.ninpou.stormotiontesttask.R
 import com.ninpou.stormotiontesttask.databinding.FragmentDetailBinding
 import com.ninpou.stormotiontesttask.di.DependencyInjectionTemplate
-import com.ninpou.stormotiontesttask.model.Data
 import com.ninpou.stormotiontesttask.model.DataVideo
 import com.ninpou.stormotiontesttask.view.fragments.MainListFragment.Companion.TAG
 import com.ninpou.stormotiontesttask.viewmodel.SharedViewModel
@@ -48,8 +47,6 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        sharedViewModel.loadVideoData()
-
         title = requireArguments().getString("title").toString()
         subTitle = requireArguments().getString("subtitle").toString()
         image = requireArguments().getString("image").toString()
@@ -69,6 +66,7 @@ class DetailFragment : Fragment() {
 
         setupViewModel()
         loadDataUIFromRecycler()
+        //loadVideoAndDescriptionUI(position, sharedViewModel.videoListData.value ?: emptyList())
         return view
     }
 
@@ -92,13 +90,13 @@ class DetailFragment : Fragment() {
 
     private fun loadVideoAndDescriptionUI(position: Int, videoList: List<DataVideo>) {
         // crash -> empty list
-        // detailBinding.textDescription.text = videoList[position].description
+        detailBinding.textDescription.text = videoList[position].descriptions
 
         val mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(detailBinding.videoView)
-        //detailBinding.videoView.setVideoPath(videoList[position].videoUrl)
+        detailBinding.videoView.setVideoPath(videoList[position].videoUrl)
         // hardcoded
-        detailBinding.videoView.setVideoPath("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        // detailBinding.videoView.setVideoPath("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         detailBinding.videoView.start()
         detailBinding.videoView.setMediaController(mediaController)
     }
@@ -116,7 +114,6 @@ class DetailFragment : Fragment() {
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
 
-        loadVideoAndDescriptionUI(position, it)
     }
 
     private val isViewLoadingObserver = Observer<Boolean> {
@@ -136,6 +133,11 @@ class DetailFragment : Fragment() {
         Log.v(TAG, "emptyListObserver $it")
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.VISIBLE
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.loadVideoData()
     }
 
     private fun setUpToolbar() {

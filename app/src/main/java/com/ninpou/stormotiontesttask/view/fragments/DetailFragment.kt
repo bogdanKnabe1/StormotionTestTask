@@ -34,6 +34,12 @@ class DetailFragment : Fragment() {
     lateinit var subTitle: String
     lateinit var image: String
     private var position: Int = 0
+    private var mockVideoDataList = List(2) {
+        DataVideo(
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+            "TEST"
+        )
+    }
 
     // view model
     private val sharedViewModel: SharedViewModel by activityViewModels {
@@ -47,6 +53,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sharedViewModel.loadVideoData()
         title = requireArguments().getString("title").toString()
         subTitle = requireArguments().getString("subtitle").toString()
         image = requireArguments().getString("image").toString()
@@ -89,14 +96,11 @@ class DetailFragment : Fragment() {
     }
 
     private fun loadVideoAndDescriptionUI(position: Int, videoList: List<DataVideo>) {
-        // crash -> empty list
         detailBinding.textDescription.text = videoList[position].descriptions
 
         val mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(detailBinding.videoView)
         detailBinding.videoView.setVideoPath(videoList[position].videoUrl)
-        // hardcoded
-        // detailBinding.videoView.setVideoPath("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         detailBinding.videoView.start()
         detailBinding.videoView.setMediaController(mediaController)
     }
@@ -113,6 +117,12 @@ class DetailFragment : Fragment() {
         Log.v(TAG, "data updated IN details $it")
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.GONE
+
+        if (it.isNotEmpty()) {
+            loadVideoAndDescriptionUI(position, it)
+        } else {
+            loadVideoAndDescriptionUI(0, mockVideoDataList)
+        }
 
     }
 
@@ -133,11 +143,6 @@ class DetailFragment : Fragment() {
         Log.v(TAG, "emptyListObserver $it")
         detailBinding.layoutEmpty.layoutEmptyRoot.visibility = View.VISIBLE
         detailBinding.layoutError.layoutErrorRoot.visibility = View.GONE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        sharedViewModel.loadVideoData()
     }
 
     private fun setUpToolbar() {
